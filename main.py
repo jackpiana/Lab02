@@ -2,24 +2,40 @@ import translator as tr
 
 t = tr.Translator()
 
+active = True
 
-while(True):
+dizAlienoItaliano, dizItalianoAlieno = t.loadDictionary("dictionary.txt")
+
+while(active):
 
     t.printMenu()
 
-    t.loadDictionary("filename.txt")
+    txtIn = input("digita numero per selezionare: ")
 
-    txtIn = input()
+    if txtIn in ["1", "2", "3", "4"]:
 
-    # Add input control here!
+        # Add input control here!
 
-    if int(txtIn) == 1:
-        print()
-        txtIn = input()
-        pass
-    if int(txtIn) == 2:
-        pass
-    if int(txtIn) == 3:
-        pass
-    if int(txtIn) == 4:
-        break
+        if int(txtIn) == 1:
+            newParolaAliena = input("Ok, quale parola aliena devo aggiungere? ")
+            newTraduzione = input("qual'è la sua traduzione italiana ")
+            entry = [newParolaAliena, newTraduzione]
+            t.handleAdd(entry)
+            print(f"{entry} Aggiunta!\n")
+            continue
+
+        if int(txtIn) == 2:
+            newParolaDaCercare = input("Ok, quale parola aliena devo cercare? ")
+            risultato = t.handleTranslate(newParolaDaCercare, dizAlienoItaliano)
+            print(f"{risultato}\n")
+            continue
+
+        if int(txtIn) == 3:
+            wildParola = input("Ok, quale parola aliena con wildcard devo cercare? ")
+            risultato = t.handleWildCard(wildParola, dizAlienoItaliano)
+            print(f"{risultato}\n")
+
+        if int(txtIn) == 4:
+            break
+
+
